@@ -1,59 +1,78 @@
-let products;
 
-fetch("https://fakestoreapi.com/products")
-.then((response) => response.json())
-.then((result) => {
-    products = result;
+    fetch('https://fakestoreapi.com/products')
+        .then((response) => response.json())
+        .then((products) => {
+            console.log("Fetched Products:", products); 
 
+        products.forEach((product) => {
+            
+            // Container
+            const container = document.createElement("div");
+            container.className = "product-container";
 
-    products.map((products,index,array) => {
-        const price = document.createElement("price")
-        const image = document.createElement("img");
-        const container = document.createElement("div");
-        const title = document.createElement("h3");
-        const description = document.createElement("p");
+            // Title
+            const title = document.createElement("h3");
+            title.innerText = product.title;
+            title.className = "title";
 
+            // Description
+            const description = document.createElement("p");
+            description.innerText = product.description;
+            description.className = "description";
 
-    //button
-        const button = document.createElement("button")
-        button.innerHTML = "see more"
-        button.id = "button"
-        document.body.appendChild(button)
+            // Price
+            const price = document.createElement("p");
+            price.innerText = `Price: $${product.price}`;
+            price.className = "price";
 
-        button.addEventListener("click", (event) => {
-            console.log(event.target)          
-        })
+            // Image
+            const image = document.createElement("img");
+            image.src = product.image;
+            image.alt = product.title;
+            image.width = 250;
+            image.height = 250;
+            image.className = "img";
 
+            // See More Button
+            const button = document.createElement("button");
+            button.innerText = "See More";
+            button.className = "button";
 
-        //modal 
+            // Modal
+            const modal = document.createElement("div");
+            modal.className = "modal";
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>${product.title}</h3>
+                    <img src="${product.image}" width="200px" height="200px" alt="${product.title}">
+                    <p>${product.description}</p>
+                    <p>Price: $${product.price}</p>
+                </div>
+            `;
 
-        const modal = document.createElement("modal")
-        modal.id = 'modal'
-        container.appendChild(modal)
+            document.body.appendChild(modal);
 
-    
-        title.innerHTML = products.title;
-        title.innerHTML = products.description;
-        price.innerHTML = products.price;
-        price.id = "price"
+            button.addEventListener("click", () => {
+                modal.style.display = "block";
+            });
 
-        container.appendChild(price)
-        container.appendChild(title);
-        container.appendChild(description);
-        document.body.appendChild(container);
+            modal.querySelector(".close").addEventListener("click", () => {
+                modal.style.display = "none";
+            });
 
+            window.addEventListener("click", (event) => {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
 
+            container.appendChild(image);
+            container.appendChild(title);
+            container.appendChild(description);
+            container.appendChild(price);
+            container.appendChild(button);
 
-        //image
-        image.src = "https://t3.ftcdn.net/jpg/04/85/49/84/360_F_485498470_HPZ4hpLnyZdLqNs6r1nFsUz2Wvd50wXt.jpg"
-        image.setAttribute("width", "250px");
-        image.setAttribute("height", "250px");
-        image.className = "img";
-        
-        // image.addEventListener("mouseover", (event) => {
-        //     console.log(event.target)
-        // })
-        document.body.appendChild(image); 
-        // console.log(products,index)
+            document.body.appendChild(container);
+        });
     });
-})
