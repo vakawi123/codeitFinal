@@ -1,0 +1,46 @@
+body{
+    background-color: #F5ECD5;
+}
+
+#navbar {
+  background-color: #578E7E;
+  padding: 15px 0;  
+  position: fixed;
+  top : 0;
+  left : 0;
+  right: 0;
+  padding-left: 15px;  
+}
+
+a{
+    text-decoration: none;
+    color : #3D3D3D ;
+    margin-left: 15px;          
+    padding: 5px 10px;          
+    display: inline-block;
+}
+
+h3{
+  margin-top : 110px;
+  width:50rem;
+}
+
+text-container{
+  display: flex;
+  align-items: center;
+}
+
+
+#button{
+  background-color: rgb(61, 78, 231);
+  text-decoration: none;
+  border-radius: 16px;
+  width : 90px;
+  height: 30px;
+}
+
+#price{
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
